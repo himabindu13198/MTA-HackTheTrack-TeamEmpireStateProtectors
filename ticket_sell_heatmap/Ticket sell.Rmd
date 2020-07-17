@@ -1,0 +1,130 @@
+---
+title: "Visualizing Ticket Sell at Different Station"
+author: "Xiaona Zhou"
+date: "Last edited: `r format(Sys.time(), '%B %d %Y')`"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '3'
+  pdf_document:
+    toc: yes
+    toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+library(readr)
+library(tidyverse)
+library(ggplot2)
+library(plotly)
+library(jsonlite)
+library(lubridate)
+library(knitr)
+theme_set(theme_bw())
+
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+
+# Load and clean data 
+```{r}
+
+load("ticket_sell.RData")
+ticket_sell <- ticket_1%>% 
+  select(TransactionDate, TransactionTime,OriginStation, OriginStationId, DestinationStation, DestinationStationId, LineId) %>% 
+  mutate(day_week = weekdays(TransactionDate),
+         round_time = hour(TransactionTime),
+         OriginStationId = as.numeric(OriginStationId)) %>% 
+  filter(!is.na(OriginStationId))
+
+
+```
+
+
+# Calculate the number of tickets sold at different station at different time of the week
+```{r}
+ticket_map <- ticket_sell %>%
+  group_by(OriginStation,OriginStationId, day_week,round_time) %>%
+  summarise(count =n()) %>% arrange(desc(count))
+
+# reorder day_week for better visulization 
+ticket_map$day_week <- factor(ticket_map$day_week, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+station_names <- unique(ticket_map$OriginStation)
+i<-1
+```
+
+# Heatmap of ticket sells at different station 
+
+```{r}
+rsb <- paste(" Tickets sold at ", station_names[i])
+ticket_map%>% filter(OriginStation == station_names[i]) %>% 
+ggplot(aes(day_week, factor(round_time))) +
+  geom_tile(aes(fill = count), colour = "white") +
+  ggtitle(paste0(rsb))+
+  scale_fill_gradient(low = "white", high = "steelblue") +
+  labs(x="Time", y="Day", fill="# tickets sold")+
+  theme_minimal()
+i<- i+1
+```
+
+
+
+
+```{r echo=FALSE}
+rsb <- paste(" Tickets sold at ", station_names[i])
+ticket_map%>% filter(OriginStation == station_names[i]) %>% 
+ggplot(aes(day_week, factor(round_time))) +
+  geom_tile(aes(fill = count), colour = "white") +
+  ggtitle(paste0(rsb))+
+  scale_fill_gradient(low = "white", high = "steelblue") +
+  labs(x="Time", y="Day", fill="# tickets sold")+
+  theme_minimal()
+i<- i+1
+```
+
+
+
+
+```{r echo=FALSE}
+rsb <- paste(" Tickets sold at ", station_names[i])
+ticket_map%>% filter(OriginStation == station_names[i]) %>% 
+ggplot(aes(day_week, factor(round_time))) +
+  geom_tile(aes(fill = count), colour = "white") +
+  ggtitle(paste0(rsb))+
+  scale_fill_gradient(low = "white", high = "steelblue") +
+  labs(x="Time", y="Day", fill="# tickets sold")+
+  theme_minimal()
+i<- i+1
+```
+
+
+```{r echo=FALSE}
+rsb <- paste(" Tickets sold at ", station_names[i])
+ticket_map%>% filter(OriginStation == station_names[i]) %>% 
+ggplot(aes(day_week, factor(round_time))) +
+  geom_tile(aes(fill = count), colour = "white") +
+  ggtitle(paste0(rsb))+
+  scale_fill_gradient(low = "white", high = "steelblue") +
+  labs(x="Time", y="Day", fill="# tickets sold")+
+  theme_minimal()
+i<- i+1
+```
+
+
+
+```{r echo=FALSE}
+rsb <- paste(" Tickets sold at ", station_names[i])
+ticket_map%>% filter(OriginStation == station_names[i]) %>% 
+ggplot(aes(day_week, factor(round_time))) +
+  geom_tile(aes(fill = count), colour = "white") +
+  ggtitle(paste0(rsb))+
+  scale_fill_gradient(low = "white", high = "steelblue") +
+  labs(x="Time", y="Day", fill="# tickets sold")+
+  theme_minimal()
+i<- i+1
+```
+
