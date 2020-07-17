@@ -1,5 +1,5 @@
 ---
-title: "Visualizing Ticket Sell at Different Station"
+title: "Visualizing Ticket Sales at Different Station"
 author: "Xiaona Zhou"
 date: "Last edited: `r format(Sys.time(), '%B %d %Y')`"
 output:
@@ -56,7 +56,7 @@ station_names <- unique(ticket_map$OriginStation)
 i<-1
 ```
 
-# Heatmap of ticket sells at different station 
+# Heatmap of ticket sales at different station 
 
 ```{r}
 rsb <- paste(" Tickets sold at ", station_names[i])
