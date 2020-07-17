@@ -41,11 +41,10 @@ ticket_sell <- ticket_1%>%
          OriginStationId = as.numeric(OriginStationId)) %>% 
   filter(!is.na(OriginStationId))
 
-
 ```
 
 
-# Calculate the number of tickets sold at different station at different time of the week
+# Calculate the number of tickets sold at different station at different time of the week between 2019-06-01 and 2019-09-30
 ```{r}
 ticket_map <- ticket_sell %>%
   group_by(OriginStation,OriginStationId, day_week,round_time) %>%

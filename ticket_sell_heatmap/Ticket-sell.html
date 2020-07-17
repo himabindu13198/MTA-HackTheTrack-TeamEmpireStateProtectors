@@ -1642,7 +1642,7 @@ summary {
 <div id="TOC">
 <ul>
 <li><a href="#load-and-clean-data">Load and clean data</a></li>
-<li><a href="#calculate-the-number-of-tickets-sold-at-different-station-at-different-time-of-the-week">Calculate the number of tickets sold at different station at different time of the week</a></li>
+<li><a href="#calculate-the-number-of-tickets-sold-at-different-station-at-different-time-of-the-week-between-2019-06-01-and-2019-09-30">Calculate the number of tickets sold at different station at different time of the week between 2019-06-01 and 2019-09-30</a></li>
 <li><a href="#heatmap-of-ticket-sells-at-different-station">Heatmap of ticket sells at different station</a></li>
 </ul>
 </div>
@@ -1657,8 +1657,8 @@ ticket_sell &lt;- ticket_1%&gt;%
          OriginStationId = as.numeric(OriginStationId)) %&gt;% 
   filter(!is.na(OriginStationId))</code></pre>
 </div>
-<div id="calculate-the-number-of-tickets-sold-at-different-station-at-different-time-of-the-week" class="section level1">
-<h1>Calculate the number of tickets sold at different station at different time of the week</h1>
+<div id="calculate-the-number-of-tickets-sold-at-different-station-at-different-time-of-the-week-between-2019-06-01-and-2019-09-30" class="section level1">
+<h1>Calculate the number of tickets sold at different station at different time of the week between 2019-06-01 and 2019-09-30</h1>
 <pre class="r"><code>ticket_map &lt;- ticket_sell %&gt;%
   group_by(OriginStation,OriginStationId, day_week,round_time) %&gt;%
   summarise(count =n()) %&gt;% arrange(desc(count))
