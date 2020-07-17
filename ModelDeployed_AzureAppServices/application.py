@@ -2,7 +2,7 @@
     # coding: utf-8
 
     # In[1]:
-def func_to_run:
+def func_to_run():
 
     #importing libraries
     import itertools
